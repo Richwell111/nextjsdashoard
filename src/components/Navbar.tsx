@@ -1,5 +1,6 @@
-import { LogOut, Moon, Settings, User } from 'lucide-react'
-import Link from 'next/link'
+"use client";
+import { LogOut, Moon, Settings, Sun, User } from "lucide-react";
+import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -9,14 +10,44 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Button } from "./ui/button";
+import { useTheme } from "next-themes";
+import { SidebarTrigger, useSidebar } from "./ui/sidebar";
 
 function Navbar() {
+  const {theme,setTheme} = useTheme()
+  //  const { toggleSidebar } = useSidebar();
   return (
-    <nav className="flex items-center p-4 justify-between">
+    <nav className=" flex items-center p-4 justify-between">
+      {/* LEFT */}
+      <SidebarTrigger />
+      {/* <Button variant="outline" onClick={toggleSidebar}>
+        Custom Button
+      </Button> */}
       <div className="flex items-center gap-4">
-        <Link href={""}>Dashboard</Link>
-        <Moon />
-
+        <Link href="/">Dashboard</Link>
+        {/* THEME MENU */}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline" size="icon">
+              <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+              <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+              <span className="sr-only">Toggle theme</span>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem onClick={() => setTheme("light")}>
+              Light
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setTheme("dark")}>
+              Dark
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setTheme("system")}>
+              System
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+        {/* USER MENU */}
         <DropdownMenu>
           <DropdownMenuTrigger>
             {" "}
@@ -25,7 +56,7 @@ function Navbar() {
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
           </DropdownMenuTrigger>
-          <DropdownMenuContent>
+          <DropdownMenuContent sideOffset={10}>
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
@@ -37,7 +68,7 @@ function Navbar() {
               Settings
             </DropdownMenuItem>
 
-            <DropdownMenuItem>
+            <DropdownMenuItem variant="destructive">
               <LogOut className="h-[1.2rem] w-[1.2rem] mr-2" />
               Logout
             </DropdownMenuItem>
@@ -48,4 +79,4 @@ function Navbar() {
   );
 }
 
-export default Navbar
+export default Navbar;
