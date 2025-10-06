@@ -2,7 +2,9 @@ import AppAreaChart from "@/components/AppAreaChart";
 import AppBarChart from "@/components/AppBarChart";
 import AppPieChart from "@/components/AppPieChart";
 import CardList from "@/components/CardList";
-import { Button } from "@/components/ui/button";
+import TodoList from "@/components/TodoList";
+
+
 
 export default function Home() {
   return (
@@ -20,7 +22,7 @@ export default function Home() {
         <AppPieChart />
       </div>
 
-      <div className="bg-primary-foreground p-4 rounded-lg">Text</div>
+      <div className="bg-primary-foreground p-4 rounded-lg"><TodoList/></div>
 
       <div className="bg-primary-foreground p-4 rounded-lg lg:col-span-2 xl:col-span-1 2xl:col-span-2">
         <AppAreaChart />
